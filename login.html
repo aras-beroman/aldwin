@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script src="./test.js"></script>
+</head>
+
+<body>
+<!-- <form action="login.php" method="post">
+    <input type="text" name="username" placeholder="what is your name"></input>
+    <input type="password" name="password" placeholder="password"></input>
+    <button type="submit">Submit</button>
+</form> -->
+
+<h3 id="message" style="visibility: hidden;"></h3>
+<input type="text" name="username" id="username" placeholder="what is your name"></input>
+    <input type="password" name="password" id="password" placeholder="password"></input>
+    <button type="submit" onclick="handleSubmit()">Submit</button>
+
+</body>
+<script>
+    function handleSubmit() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+    
+$.ajax({
+        url: "login.php",
+        type: "post",
+        data: {"username":username,"password":password} ,
+        dataType: 'json',
+        success: function (response) {
+            // You will get response from your PHP page (what you echo or print)\
+            if (response.success) {
+                let messageElement = document.getElementById('message');
+                messageElement.innerHTML = response.message;
+                messageElement.style.visibility = "visible"
+           
+                setTimeout(() => {
+                    messageElement.style.visibility = "hidden";
+                }, 3000);
+            } else {
+                let messageElement = document.getElementById('message');
+                messageElement.innerHTML = response.message;
+                messageElement.style.visibility = "visible"
+            }
+           
+        },
+        error: function(response,jqXHR, textStatus, errorThrown) {
+
+           console.log(textStatus, errorThrown);
+        }
+    });
+    }
+</script>
+</html>
