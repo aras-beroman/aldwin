@@ -33,18 +33,19 @@ $arrayOfPersons = [
 
 function getAllMarriedPersons($arrayOfPersons) {
     $marriedPersons = [];
-
     foreach ($arrayOfPersons as $persoon) {
        if ($persoon['isMarried']) {
         array_push($marriedPersons, $persoon);
        } 
     }
-
     return $marriedPersons;
-
 }
 
 $filteredArrayOfPersons = getAllMarriedPersons($arrayOfPersons);
 
 print_r($filteredArrayOfPersons);
+
+
+
+
 
